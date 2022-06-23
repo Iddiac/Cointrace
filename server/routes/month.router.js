@@ -6,13 +6,13 @@ const {
 } = require('../modules/authentication-middleware');
 
 
-router.get('/:id',rejectUnauthenticated, (req, res) => {
+router.get('/:monthName',rejectUnauthenticated, (req, res) => {
   console.log('this is the current user in get', req.user)
   console.log('i am getting this param', req.params.id)
   const query=`SELECT monthly_income, "user".username, "month".name, "month".id FROM "user"
   JOIN "month" ON "month".user_id="user".id
-  WHERE "user".id=$1 AND "month".id=$2` /*this is where i am looking at things */
-  pool.query(query,[req.user.id,req.params.id])
+  WHERE "user".id=$1 AND "month".name=$2` /*this is where i am looking at things */
+  pool.query(query,[req.user.id,req.params.monthName])
   .then(result =>{
     console.log(' in month router', result.rows)
     res.send(result.rows);
@@ -35,5 +35,23 @@ router.post('/', rejectUnauthenticated,(req, res) => {
           res.sendStatus(500)
       })
 });
+
+router.put('/:id', (req,res)=>{
+  let id=req.params.id
+  console.log(' it atleast got to the put router in month')
+  let income=req.body;
+  const querytext= `UPDATE "month"
+SET "monthly_income" = $2
+WHERE "month".id = $1`
+  pool.query(querytext,[id,income.income])
+  .then(()=>{
+      res.sendStatus(200)
+  }).catch((err)=>{
+      console.error('not working put router in month', err)
+  })
+})
+
+
+
 
 module.exports = router;

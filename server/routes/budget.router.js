@@ -8,11 +8,11 @@ const {
 
 router.get('/:id',rejectUnauthenticated, (req, res) => {
   console.log('the get is running budget ')
-  const query=`select "c".name AS "category_name", "m".monthly_income,total_amount FROM "budget"
+  const query=`select "c".name AS "category_name", "m".monthly_income,total_amount,"budget".id FROM "budget"
   JOIN "user" AS "u" ON "budget".user_id="u".id
   JOIN "month" as "m" ON "budget".month_id= "m".id
   JOIN "category" as "c" ON "budget".category_id="c".id
-  WHERE "u".id=$1 AND "m".id=$2
+  WHERE "u".id=$1 AND "m".name=$2
   order by "m".name`
   pool.query(query,[req.user.id,req.params.id])
   .then(result =>{
@@ -35,6 +35,21 @@ router.post('/', rejectUnauthenticated,(req, res) => {
           res.sendStatus(500)
       })
 });
+
+router.put('/:id', (req,res)=>{
+  let id=req.params.id
+  console.log(' it atleast got to the put router in budget')
+  let t=req.body;
+  const querytext= `UPDATE "budget"
+SET "total_amount" = $2
+WHERE "budget".month_id= $1 AND "budget".category_id=$3`
+  pool.query(querytext,[id, t.total, t.id])
+  .then(()=>{
+      res.sendStatus(200)
+  }).catch((err)=>{
+      console.error('not working put router in budget', err)
+  })
+})
 
 
 

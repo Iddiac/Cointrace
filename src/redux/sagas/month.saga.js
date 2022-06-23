@@ -12,8 +12,19 @@ function* fetchMonth(action) {
   }
 }
 
+function* updateIncome(action) {
+  try {
+    yield axios.put(`/api/month/${action.payload.id}`, action.payload)
+    yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID} })
+  }
+  catch {
+    console.error('error getting into in monthSaga put')
+  }
+}
+
 function* monthSaga() {
   yield takeLatest('FETCH_MONTH', fetchMonth);
+  yield takeLatest('UPDATE_INCOME', updateIncome);
 }
 
 export default monthSaga;

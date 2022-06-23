@@ -35,8 +35,9 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   FROM "transactions"
   JOIN "budget" ON "transactions"."budget_id"="budget"."id"
   JOIN "category" ON "budget".category_id="category"."id"
+  JOIN "month" on "budget".month_id = "month".id
   WHERE "transactions"."user_id"=$1 -- current user
-  AND "budget"."month_id"=$2 -- for the month of may
+  AND "month"."name"=$2 -- for the month of may
   GROUP BY "category"."id";
   `
   //AND "budget"."month_id"='1'
