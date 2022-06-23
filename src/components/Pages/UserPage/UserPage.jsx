@@ -9,7 +9,7 @@ function UserPage() {
   const month = useSelector((store) => store.month)
   const budget = useSelector((store) => store.budget)
   const transactions = useSelector((store) => store.transactions)
-  const [currentMonth, setCurrentMonth]= useState(0);
+  const [currentMonth, setCurrentMonth] = useState(0);
   console.log('these are months', month)
   console.log('there are transactions', transactions)
   console.log('there are budgets', budget)
@@ -22,18 +22,18 @@ function UserPage() {
   const firstMonth = () => {
     return (
       console.log(currentMonth),
-      dispatch({ type: 'FETCH_MONTH', payload: { monthID:currentMonth} }),
-      dispatch({ type: 'FETCH_TRANSACTIONS',payload: { monthID:currentMonth}}),
-      dispatch({ type: 'FETCH_BUDGET', payload: { monthID:currentMonth} })
+      dispatch({ type: 'FETCH_MONTH', payload: { monthID: currentMonth } }),
+      dispatch({ type: 'FETCH_TRANSACTIONS', payload: { monthID: currentMonth } }),
+      dispatch({ type: 'FETCH_BUDGET', payload: { monthID: currentMonth } })
     )
   }
 
   const secondMonth = () => {
     return (
       console.log(currentMonth),
-      dispatch({ type: 'FETCH_MONTH', payload: { monthID:currentMonth} }),
-      dispatch({ type: 'FETCH_TRANSACTIONS',payload: { monthID:currentMonth}}),
-      dispatch({ type: 'FETCH_BUDGET', payload: { monthID:currentMonth} })
+      dispatch({ type: 'FETCH_MONTH', payload: { monthID: currentMonth } }),
+      dispatch({ type: 'FETCH_TRANSACTIONS', payload: { monthID: currentMonth } }),
+      dispatch({ type: 'FETCH_BUDGET', payload: { monthID: currentMonth } })
     )
   }
 
@@ -43,8 +43,8 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <button onClick={() => {setCurrentMonth(1),firstMonth()}}>January</button>
-      <button onClick={() =>{setCurrentMonth(2),secondMonth()}}>February</button>
+      <button onClick={() => { setCurrentMonth(1), firstMonth() }}>January</button>
+      <button onClick={() => { setCurrentMonth(2), secondMonth() }}>February</button>
       <p>{month.map((m, i) => {
         return (
           <>
@@ -57,35 +57,45 @@ function UserPage() {
           </>)
       })
       }</p>
-      
-        <p>{transactions.map((t) => {
-          return (
-            <>
-              {console.log('this is in trans', t)}
-              <p key={transactions.id}>
-                <strong>Category type :</strong> {t.name}
-                <br />
-                <strong>category budget: </strong> {t.total_amount}
-                <br />
-                <strong> total spent:</strong> {t.total_spent}
-                <br />
-                <p>{t.transactions.map((one) => {
-                  return (
-                    <>
-                      <p>
-                        <strong> transaction:</strong> {one.name}
-                        <br />
-                        <strong> spent:</strong> {one.amount}
-                      </p>
-                    </>
-                  )
-                })}</p>
-              </p>
-              <p>Your remaining budget is: <strong></strong>{t.total_amount - t.total_spent}</p>
-            </>
-          )
-        })
-        }</p>
+      <p>{budget.map((b) => {
+        return (
+          <>
+            <p> this is:{b.category_name} </p>
+            <p>{transactions.map((t) => {
+              if (b.category_name === t.name) {
+                return (
+                  <>
+                    {console.log('this is in trans', t)}
+                    <p key={transactions.id}>
+                      <strong>Category type :</strong> {t.name}
+                      <br />
+                      <strong>category budget: </strong> {t.total_amount}
+                      <br />
+                      <strong> total spent:</strong> {t.total_spent}
+                      <br />
+                      <p>{t.transactions.map((one) => {
+                        return (
+                          <>
+                            <p>
+                              <strong> transaction:</strong> {one.name}
+                              <br />
+                              <strong> spent:</strong> {one.amount}
+                            </p>
+                          </>
+                        )
+                      })}</p>
+                    </p>
+                    <p>Your remaining budget is: <strong></strong>{t.total_amount - t.total_spent}</p>
+                  </>
+                )
+              }
+            })
+            }</p>
+
+          </>
+        )
+      })}</p>
+
       <LogOutButton className="btn" />
     </div>
   );
