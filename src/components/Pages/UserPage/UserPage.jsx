@@ -23,7 +23,16 @@ function UserPage() {
     return (
       console.log(currentMonth),
       dispatch({ type: 'FETCH_MONTH', payload: { monthID:currentMonth} }),
-      dispatch({ type: 'FETCH_TRANSACTIONS',payload: { monthID:currentMonth}  }),
+      dispatch({ type: 'FETCH_TRANSACTIONS',payload: { monthID:currentMonth}}),
+      dispatch({ type: 'FETCH_BUDGET', payload: { monthID:currentMonth} })
+    )
+  }
+
+  const secondMonth = () => {
+    return (
+      console.log(currentMonth),
+      dispatch({ type: 'FETCH_MONTH', payload: { monthID:currentMonth} }),
+      dispatch({ type: 'FETCH_TRANSACTIONS',payload: { monthID:currentMonth}}),
       dispatch({ type: 'FETCH_BUDGET', payload: { monthID:currentMonth} })
     )
   }
@@ -35,7 +44,7 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <button onClick={() => {setCurrentMonth(1),firstMonth()}}>January</button>
-      <button onClick={() => dispatch({ type: 'FETCH_MONTH', payload: { monthID: 2 } })}>February</button>
+      <button onClick={() =>{setCurrentMonth(2),secondMonth()}}>February</button>
       <p>{month.map((m, i) => {
         return (
           <>
