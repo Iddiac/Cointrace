@@ -115,3 +115,7 @@ input {
 .wrapper{
   display:flex
 }
+
+span{
+  color: green;
+}

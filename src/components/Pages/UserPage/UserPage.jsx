@@ -17,9 +17,9 @@ function UserPage() {
   const budget = useSelector((store) => store.budget)
   const transactions = useSelector((store) => store.transactions)
   const [income, setIncome] = useState(0);
-  const [budId, setBudId]= useState(0)
+  const [budId, setBudId] = useState(0)
   const [open, setOpen] = useState(false)
-  const [show,setshow]= useState(false)
+  const [show, setshow] = useState(false)
   const [gasTotal, setGasTotal] = useState('');
   const [foodTotal, setFoodTotal] = useState('');
   const [entertainmentTotal, setEntertainmentTotal] = useState('');
@@ -28,7 +28,7 @@ function UserPage() {
 
 
 
-  function handleOpen(b){
+  function handleOpen(b) {
     setOpen(true); setBudId(b)
   };
   const handleClose = () => {
@@ -72,7 +72,7 @@ function UserPage() {
 
 
   return (
-    
+
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
@@ -93,7 +93,7 @@ function UserPage() {
         <button onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { id: 3, monthID: month.id, categoryId: 3, total: entertainmentTotal } })}>change Entertainment total</button>
         <br />
       </div>
-      
+
 
       <p> Current month is: {month.name}
         <br />
@@ -117,12 +117,12 @@ function UserPage() {
       </>
       <p className='budgets'>{budget.map((b) => {
         return (
-          <>    
-                        <Button  variant="contained" onClick={()=> handleOpen(b.id)}>Add {b.category_name}</Button>
-              {console.log('what is this',b)}
+          <>
+            <Button variant="contained" onClick={() => handleOpen(b.id)}>Add {b.category_name}</Button>
+
             <div className='wrapper'>
               <p>{transactions.map((t, i) => {
-                {console.log('THIS IS DOPE', t)}
+
                 if (b.category_name === t.name) {
                   return (
                     <>
@@ -149,9 +149,10 @@ function UserPage() {
                           )
                         })}</p>
                       </p>
-                      <p>Your remaining budget is: <strong>{totalRemaining = (t.total_amount - t.total_spent)}</strong></p>
-                      <p>Your remaining money is: <strong>{t.total_spent}</strong></p>
+                      <p>Your remaining budget is: <strong>{t.total_amount - t.total_spent}</strong></p>
+                      {console.log('month',month)}
                     </>
+
                   )
                 }
               })
@@ -160,7 +161,7 @@ function UserPage() {
           </>
         )
       })}</p>
-
+  <h3>You have <span>{month.monthly_income-month.total_sum}</span> left in your budget!</h3>
       <LogOutButton className="btn" />
     </div>
   );

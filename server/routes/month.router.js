@@ -8,7 +8,12 @@ const {
 
 router.get('/:monthName',rejectUnauthenticated, (req, res) => {
   console.log('this is the current user in get', req.user)
-  const query=`SELECT monthly_income, "user".username, "month".name, "month".id FROM "user"
+  const query=`SELECT monthly_income,
+  (SELECT SUM("transactions"."amount") AS "total_sum" FROM transactions
+  JOIN "budget" ON "transactions"."budget_id"="budget"."id"
+  JOIN "month" on "budget".month_id = "month".id
+  WHERE "month"."name"=$2), 
+  "user".username, "month".name, "month".id FROM "user"
   JOIN "month" ON "month".user_id="user".id
   WHERE "user".id=$1 AND "month".name=$2` /*this is where i am looking at things */
   pool.query(query,[req.user.id,req.params.monthName])
