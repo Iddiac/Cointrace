@@ -8,7 +8,6 @@ const {
 
 router.get('/:monthName',rejectUnauthenticated, (req, res) => {
   console.log('this is the current user in get', req.user)
-  console.log('i am getting this param', req.params.id)
   const query=`SELECT monthly_income, "user".username, "month".name, "month".id FROM "user"
   JOIN "month" ON "month".user_id="user".id
   WHERE "user".id=$1 AND "month".name=$2` /*this is where i am looking at things */
@@ -28,7 +27,7 @@ router.post('/', rejectUnauthenticated,(req, res) => {
   VALUES($1,$2,$3)`
       pool.query(queryText,[req.user.id,req.body.name,req.body.monthly_income])
       .then((result)=>{
-        console.log('this is in server POST for Month', req.user.id,req.body.name,req.body.monthly_income)
+      console.log('month post works')
           res.sendStatus(201)
       }).catch((err)=>{
           console.error('month function is not working in month post', err)

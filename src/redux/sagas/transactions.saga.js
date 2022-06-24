@@ -11,9 +11,21 @@ function* fetchTransactions(action) {
   }
 }
 
+
+function* addTransaction(action) {
+   console.log('this is peanut butter',action.payload)
+  try {
+    yield axios.post(`/api/transactions`, action.payload)
+    yield put({ type:'FETCH_BUDGET', payload:{monthID: action.payload.monthID} })
+    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
+  } catch {
+    console.error('error adding in addTRANSACTIONS')
+  }
+}
+
+
 function* deleteTransactions(action) {
   try {
-    console.log('this is action payload', action.payload)
     yield axios.delete(`/api/transactions/${action.payload.id}`, action.payload)
     yield put({ type:'FETCH_BUDGET', payload:{monthID: action.payload.monthID} })
     yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
@@ -26,6 +38,7 @@ function* deleteTransactions(action) {
 function* transactionsSaga() {
   yield takeLatest('FETCH_TRANSACTIONS', fetchTransactions);
   yield takeLatest('DELETE_TRANSACTIONS', deleteTransactions);
+  yield takeLatest('ADD_TRANSACTIONS', addTransaction);
 }
 
 export default transactionsSaga;

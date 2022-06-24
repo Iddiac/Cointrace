@@ -6,7 +6,6 @@ function* fetchBudget(action) {
   try {
     const response = yield axios.get(`/api/budget/${action.payload.monthID}`)
     yield put({ type: 'GET_BUDGET', payload: response.data })
-    console.log('FETCH IS WORKING WOOOOOO')
   } catch {
     console.error('error getting into in Budget')
   }

@@ -26,19 +26,22 @@ const {
 */
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
+  console.log()
   const query = `
   SELECT 
 	"category"."name",
 	to_json(array_agg("transactions")) as "transactions", 
 	SUM("transactions".amount) as "total_spent",
-	(SELECT "budget".total_amount FROM "budget" WHERE "category"."id"="budget"."category_id" AND "budget"."user_id"=$1 LIMIT 1) -- CURRENT USER
+	(SELECT "budget".total_amount FROM "budget" 
+	JOIN "month" on "budget".month_id = "month".id
+	WHERE "category"."id"="budget"."category_id" AND "budget"."user_id"=1 AND  "month"."name"=$2 LIMIT 1) -- CURRENT USER
   FROM "transactions"
   JOIN "budget" ON "transactions"."budget_id"="budget"."id"
   JOIN "category" ON "budget".category_id="category"."id"
   JOIN "month" on "budget".month_id = "month".id
   WHERE "transactions"."user_id"=$1 -- current user
   AND "month"."name"=$2 -- for the month of may
-  GROUP BY "category"."id";
+  GROUP BY "category"."id"
   `
   //AND "budget"."month_id"='1'
 

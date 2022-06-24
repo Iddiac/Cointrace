@@ -44,8 +44,8 @@ router.put('/:id', (req,res)=>{
 // WHERE "budget".month_id= $2 AND "budget".category_id=$3`
 const querytext= `UPDATE "budget"
 SET "total_amount" = $1
-WHERE "budget".id= $2`
-  pool.query(querytext,[t.total, t.id])
+WHERE "budget".month_id=$2 AND "budget".category_id=$3`
+  pool.query(querytext,[t.total,t.monthID,t.categoryId])
   .then(()=>{
       res.sendStatus(200)
   }).catch((err)=>{
