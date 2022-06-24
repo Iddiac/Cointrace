@@ -6,15 +6,16 @@ import { useEffect, useState } from 'react'
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-  const month = useSelector((store) => store.month)
+  const month = useSelector((store) => store.month);
   const budget = useSelector((store) => store.budget)
   const transactions = useSelector((store) => store.transactions)
   const [income, setIncome] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [gasTotal, setGasTotal] = useState('');
+  const [foodTotal, setFoodTotal] = useState('');
+  const [entertainmentTotal, setEntertainmentTotal] = useState('');
   console.log('these are months', month)
   console.log('there are transactions', transactions)
   console.log('there are budgets', budget)
-  let set = '';
   let totalRemaining = 0;
   /*useEffect(() => {
     dispatch({ type: 'FETCH_MONTH'});
@@ -23,12 +24,10 @@ function UserPage() {
   const dispatch = useDispatch();
 
   const Months = (currentMonth) => {
-    return (
-      console.log(currentMonth),
-      dispatch({ type: 'FETCH_MONTH', payload: { monthID: currentMonth } }),
-      dispatch({ type: 'FETCH_TRANSACTIONS', payload: { monthID: currentMonth } }),
-      dispatch({ type: 'FETCH_BUDGET', payload: { monthID: currentMonth } })
-    )
+    console.log(currentMonth),
+    dispatch({ type: 'FETCH_MONTH', payload: { monthID: currentMonth } }),
+    dispatch({ type: 'FETCH_TRANSACTIONS', payload: { monthID: currentMonth } }),
+    dispatch({ type: 'FETCH_BUDGET', payload: { monthID: currentMonth } })
   }
 
 
@@ -38,32 +37,35 @@ function UserPage() {
       <p>Your ID is: {user.id}</p>
       <button onClick={() => Months('Jan-2022')}>January</button>
       <button onClick={() => Months('Feb-2022')}>February</button>
-      <p>{month.map((m, i) => {
+
+        <p> Current month is: {month.name}
+          <br />
+          Your income is: {month.monthly_income}
+          <input placeholder='Update Income' value={income} onChange={(event) => setIncome(event.target.value)} />
+          <button onClick={() => dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } })}>change</button>
+          <br />
+          Your name is: {month.username}
+        </p>
+
+    <input placeholder=' GAS ' value={gasTotal} onChange={(event) => setGasTotal(event.target.value)} />
+    <button onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { id: 1, monthID: month.id, categoryId:1, total:gasTotal } })}>change Gas total</button>
+
+    <input placeholder=' FOOD ' value={foodTotal} onChange={(event) => setFoodTotal(event.target.value)} />
+    {console.log('My FOOD TOTAL', foodTotal )}
+    <button onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { id: 2, monthID: month.id, categoryId:2, total:foodTotal } })}>change Food total</button>
+
+    <input placeholder=' ENTERTAINMENT ' value={entertainmentTotal} onChange={(event) => setEntertainmentTotal(event.target.value)} />
+    <button onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { id: 3, monthID: month.id, categoryId:3, total:entertainmentTotal } })}>change Entertainment total</button>
+    <br />
+   
+      <p className='budgets'>{budget.map((b) => {
         return (
           <>
-            <p key={i}> Current month is: {set = m.name}
-              <br />
-              Your income is: {m.monthly_income}
-              <input placeholder='Update Income' value={income} onChange={(event) => setIncome(event.target.value)} />
-              <button onClick={() => dispatch({ type: "UPDATE_INCOME", payload: { monthID: m.name, id: m.id, income } })}>change</button>
-              <br />
-              Your name is: {m.username}
-            </p>
-          </>)
-      })
-    }</p>
-    <input placeholder='Update budget' value={total} onChange={(event) => setTotal(event.target.value)} />
-    <button onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { monthID:set, id: b.id, total } })}>change budget</button>
-      <p>{budget.map((b) => {
-        return (
-          <>
-            <p><strong>{b.category_name}</strong> </p>
-            {console.log('this is b', b)}
+          <div className='wrapper'>
             <p>{transactions.map((t) => {
               if (b.category_name === t.name) {
                 return (
                   <>
-                    {console.log('this is in trans', t)}
                     <p key={transactions.id}>
                       <strong>Category type :</strong> {t.name}
                       <br />
@@ -79,6 +81,7 @@ function UserPage() {
                               <br />
                               <strong> spent:</strong> {one.amount}
                             </p>
+                            <button onClick={()=> dispatch({type:'DELETE_TRANSACTIONS', payload:{id:one.id,monthID:month.name}})}>delete</button>
                           </>
                         )
                       })}</p>
@@ -89,7 +92,7 @@ function UserPage() {
               }
             })
             }</p>
-
+            </div>
           </>
         )
       })}</p>

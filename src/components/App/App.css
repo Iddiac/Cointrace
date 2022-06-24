@@ -110,3 +110,12 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+
+.wrapper{
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-right: 30px;
+}

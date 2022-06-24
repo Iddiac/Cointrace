@@ -16,7 +16,6 @@ router.get('/:id',rejectUnauthenticated, (req, res) => {
   order by "m".name`
   pool.query(query,[req.user.id,req.params.id])
   .then(result =>{
-    console.log(' in budget router', result.rows)
     res.send(result.rows);
   }).catch((err)=>{
     console.error('error in get budget router', err)
@@ -38,18 +37,22 @@ router.post('/', rejectUnauthenticated,(req, res) => {
 
 router.put('/:id', (req,res)=>{
   let id=req.params.id
-  console.log(' it atleast got to the put router in budget')
   let t=req.body;
-  const querytext= `UPDATE "budget"
-SET "total_amount" = $2
-WHERE "budget".month_id= $1 AND "budget".category_id=$3`
-  pool.query(querytext,[id, t.total, t.id])
+  console.log('this is t', t)
+//   const querytext= `UPDATE "budget"
+// SET "total_amount" = $1
+// WHERE "budget".month_id= $2 AND "budget".category_id=$3`
+const querytext= `UPDATE "budget"
+SET "total_amount" = $1
+WHERE "budget".id= $2`
+  pool.query(querytext,[t.total, t.id])
   .then(()=>{
       res.sendStatus(200)
   }).catch((err)=>{
       console.error('not working put router in budget', err)
   })
 })
+
 
 
 

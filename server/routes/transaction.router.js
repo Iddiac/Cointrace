@@ -44,7 +44,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(query, [req.user.id,req.params.id])
     .then(result => {
-      console.log(' in transaction router', result.rows)
       res.send(result.rows);
     }).catch((err) => {
       console.error('error in get transaction router', err)
@@ -53,6 +52,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 
 router.post('/', rejectUnauthenticated,(req, res) => {
+  
   const queryText= `INSERT INTO "transactions"("name","amount","budget_id","user_id")
   VALUES($1,$2,$3,$4)`;
       pool.query(queryText,[req.body.name,req.body.amount,req.body.budget_id, req.user.id])
@@ -64,4 +64,18 @@ router.post('/', rejectUnauthenticated,(req, res) => {
           res.sendStatus(500)
       })
 });
+
+router.delete('/:id', (req,res)=>{
+  let t=req.params;
+  console.log('this is t in delete Transaction', t)
+const querytext= `DELETE FROM transactions
+WHERE "transactions"."id"=$1`
+console.log('it made it to delete in server transactions')
+  pool.query(querytext,[t.id])
+  .then(()=>{
+      res.sendStatus(200)
+  }).catch((err)=>{
+      console.error('not working delete router in transactions', err)
+  })
+})
 module.exports = router;

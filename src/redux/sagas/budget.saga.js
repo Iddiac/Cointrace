@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, select, takeLatest } from 'redux-saga/effects';
 
 
 function* fetchBudget(action) {
   try {
     const response = yield axios.get(`/api/budget/${action.payload.monthID}`)
     yield put({ type: 'GET_BUDGET', payload: response.data })
+    console.log('FETCH IS WORKING WOOOOOO')
   } catch {
     console.error('error getting into in Budget')
   }
@@ -14,7 +15,11 @@ function* fetchBudget(action) {
 function* updateTotal(action) {
   try {
     yield axios.put(`/api/budget/${action.payload.id}`, action.payload)
-    yield put({ type:'FETCH_BUDGET', payload:{monthID:action.payload.monthID} })
+    console.log('DANCING MONKEY WOOO')
+
+    const month = yield select(state => state.month);
+    yield put({ type:'FETCH_BUDGET', payload:{monthID: month.name} })
+    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:month.name} })
   }
   catch {
     console.error('error getting into in budgetsaga put')

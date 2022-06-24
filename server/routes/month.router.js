@@ -15,7 +15,7 @@ router.get('/:monthName',rejectUnauthenticated, (req, res) => {
   pool.query(query,[req.user.id,req.params.monthName])
   .then(result =>{
     console.log(' in month router', result.rows)
-    res.send(result.rows);
+    res.send(result.rows[0]);
   }).catch((err)=>{
     console.error('error in get month router', err)
   })
