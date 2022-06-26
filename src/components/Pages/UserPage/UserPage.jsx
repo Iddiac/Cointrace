@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Budgetform from '../budgetform/budgetform';
 import Monthincome from '../month/monthincome';
 import Loadmonths from '../month/loadmonths';
-import Addbudget from '../budgetform/addbudget';
+import Addbudget from '../budgetform/addcategory';
 
 
 function UserPage() {
@@ -19,11 +19,11 @@ function UserPage() {
       <Loadmonths />
       </div>
       <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <Budgetform />
       <Monthincome />
+      <Budgetform />
+      <h3 className='totalleft'> <span>You've spent ${month.total_sum}/{month.monthly_income}</span></h3>
+      <h4 className='moneyremaining'>remaining:${month.monthly_income - month.total_sum}</h4>
       <Addbudget />
-      <h3>You have <span>{month.monthly_income - month.total_sum}</span> left in your budget!</h3>
       <LogOutButton className="btn" />
     </div>
   );

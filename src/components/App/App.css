@@ -113,13 +113,32 @@ input {
 
 
 .wrapper{
-  display:flex
+  display:inline-flex;
+  text-align: center;
 }
 
-span{
-  color: green;
-}
+
+
+
 
 .container{
   margin-left: 2em;
+}
+
+
+.title{
+  text-align: left;
+}
+
+.remaining{
+text-align: right;
+color: darkorchid;
+}
+
+.totalleft{
+  color: darkcyan;
+}
+
+.moneyremaining{
+  color: darkred;
 }

@@ -1,19 +1,21 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useState} from 'react'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 export default function Monthincome() {
     const dispatch = useDispatch();
     const month = useSelector((store) => store.month);
-    const [income, setIncome] = useState(0);
+    const [income, setIncome] = useState(null);
   return (
-    <p> Current month is: {month.name}
+    <p>
+      <Typography variant="h4" color="deepskyblue">{month.name}</Typography>
     <br />
-    Your income is: {month.monthly_income}
-    <input placeholder='Update Income' value={income} onChange={(event) => setIncome(event.target.value)} />
-    <button onClick={() => dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } })}>change</button>
-    <br />
-    Your name is: {month.username}
+     income: {month.monthly_income}
+    <TextField size="small" variant='standard' value={income} onChange={(event) => setIncome(event.target.value)} />
+    <Button variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome('')}}>change</Button>
   </p>
   )
 }

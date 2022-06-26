@@ -22,7 +22,9 @@ export default function Addbudget() {
     const handleClose = () => {
 
         dispatch({ type: 'ADD_TRANSACTIONS', payload: { monthID: month.name, name: gasName, amount: gasA, budget_id: budId } })
-        setOpen(false)
+        setOpen(false);
+        setGasA('');
+        setGasName('');
 
     }
 
@@ -54,11 +56,10 @@ export default function Addbudget() {
 
                 </Modal>
             </div>
-            <p className='budgets'>{budget.map((b) => {
+            <p >{budget.map((b) => {
                 return (
-                    <>
-                        <Button variant="contained" onClick={() => handleOpen(b.id)}>Add {b.category_name}</Button>
-
+                    < >
+                        <Button  variant="contained" onClick={() => handleOpen(b.id)}>Add {b.category_name}</Button>
                         <Categorytype b={b} />
                     </>
                 )
