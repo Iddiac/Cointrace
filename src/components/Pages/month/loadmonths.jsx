@@ -31,7 +31,7 @@ export default function Loadmonths() {
                 open={isOpen}
                 onClose={()=> setIsOpen(false)}
             >
-                <Box textAlign={'center'} width='100px' p={2}>
+                <Box textAlign={'center'} width='100px'>
                     <div className='monthnames'>
                     <button onClick={() => {setIsOpen(false); Months('Jan-2022')}}><Typography variant='h6'>January</Typography></button>
                     <br />

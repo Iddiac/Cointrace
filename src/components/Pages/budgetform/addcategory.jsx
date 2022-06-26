@@ -3,8 +3,12 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import {useState} from 'react'
+import { useState } from 'react'
 import Categorytype from '../categories/categorytype';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+
+
 
 export default function Addbudget() {
     const [budId, setBudId] = useState(0)
@@ -13,18 +17,17 @@ export default function Addbudget() {
     const [gasA, setGasA] = useState(0);
     const dispatch = useDispatch();
     const budget = useSelector((store) => store.budget)
-    const month = useSelector((store)=> store.month)
+    const month = useSelector((store) => store.month)
 
 
     function handleOpen(b) {
-        setOpen(true); setBudId(b)
+        setOpen(true); 
+        setBudId(b);
     };
     const handleClose = () => {
 
         dispatch({ type: 'ADD_TRANSACTIONS', payload: { monthID: month.name, name: gasName, amount: gasA, budget_id: budId } })
-        setOpen(false);
-        setGasA('');
-        setGasName('');
+        setOpen(false)
 
     }
 
@@ -40,30 +43,31 @@ export default function Addbudget() {
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4,
+      
     }
     return (
         <div>
-            <div className='modal'>
-                <Modal open={open}
-                    onClose={closeModal}
-                    aria-labelledby="Gas"
-                    aria-describedby="insert values">
-                    <Box sx={style}>
-                        <input placeholder='item' value={gasName} onChange={(e) => setGasName(e.target.value)} /> <input type={'number'} placeholder='amount' value={gasA} onChange={(e) => setGasA(e.target.value)} />
-                        <Button variant="contained" onClick={() => handleClose()}>add transaction</Button>
-                    </Box>
 
-                </Modal>
-            </div>
-            <p >{budget.map((b) => {
+            <Modal className='modal' open={open}
+                onClose={closeModal}
+                aria-labelledby="Gas"
+                aria-describedby="insert values">
+                <Box sx={style}>
+                    <TextField label='transaction' size='small' variant="standard" value={gasName} onChange={(e) => setGasName(e.target.value)} />
+                    <TextField size='small' label='amount' variant="standard" value={gasA} type={'number'} onChange={(e) => setGasA(e.target.value)} />
+                    <Button variant="contained" onClick={() => handleClose()}>add transaction</Button>
+                </Box>
+
+            </Modal>
+
+            <Typography variant='h6'>{budget.map((b, i) => {
                 return (
-                    < >
-                        <Button  variant="contained" onClick={() => handleOpen(b.id)}>Add {b.category_name}</Button>
+                    <div key={i}>
+                        <Button variant="contained" onClick={() => handleOpen(b.id)}>Add {b.category_name}</Button>
                         <Categorytype b={b} />
-                    </>
+                    </div>
                 )
-            })}</p>
+            })}</Typography>
         </div>
     )
 }

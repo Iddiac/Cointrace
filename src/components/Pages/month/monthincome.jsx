@@ -8,15 +8,15 @@ import Typography from '@mui/material/Typography';
 export default function Monthincome() {
     const dispatch = useDispatch();
     const month = useSelector((store) => store.month);
-    const [income, setIncome] = useState(null);
+    const [income, setIncome] = useState();
   return (
-    <p>
-      <Typography variant="h4" color="deepskyblue">{month.name}</Typography>
+    <div>
+      <Typography variant="h4" color="darkviolet">{month.name}</Typography>
     <br />
      income: {month.monthly_income}
     <TextField size="small" variant='standard' value={income} onChange={(event) => setIncome(event.target.value)} />
-    <Button variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome('')}}>change</Button>
-  </p>
+    <Button variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome(0)}}>change</Button>
+    </div>
   )
 }
 

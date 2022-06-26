@@ -15,7 +15,7 @@ function Budgetform(){
         <TextField  size="small"  className="outlined-basic" label="Gas" type='number' variant="standard" value={gasTotal} onChange={(event) => setGasTotal(event.target.value)}/>  
         <Button size='small' onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { id: 1, monthID: month.id, categoryId: 1, total: gasTotal } })}>change Gas total</Button>
 
-        <TextField type="number" label="Food" size="small"  className="outlined-basic" value={foodTotal} onChange={(event) => setFoodTotal(event.target.value)} />
+        <TextField type="number" variant='standard' label="Food" size="small"  className="outlined-basic" value={foodTotal} onChange={(event) => setFoodTotal(event.target.value)} />
         <Button size='small' onClick={() => dispatch({ type: "UPDATE_BUDGET", payload: { id: 2, monthID: month.id, categoryId: 2, total: foodTotal } })}>change Food total</Button>
 
         <TextField type='number' variant='standard' label="Entertainment" size='small' className='outlined-basic' value={entertainmentTotal} onChange={(event) => setEntertainmentTotal(event.target.value)} />
