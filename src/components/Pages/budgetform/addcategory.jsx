@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react'
 import Categorytype from '../categories/categorytype';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function Addbudget() {
     const [budId, setBudId] = useState(0)
+    const [catName, setCatName] = useState('')
     const [open, setOpen] = useState(false)
     const [gasName, setGasName] = useState('');
     const [gasA, setGasA] = useState(0);
@@ -25,9 +27,10 @@ export default function Addbudget() {
         setBudId(b);
     };
     const handleClose = () => {
-
-        dispatch({ type: 'ADD_TRANSACTIONS', payload: { monthID: month.name, name: gasName, amount: gasA, budget_id: budId } })
-        setOpen(false)
+        dispatch({ type: 'ADD_TRANSACTIONS', payload: { monthID: month.name, name: gasName, amount: gasA, budget_id: budId.id } })
+        setOpen(false);
+        setGasA(0);
+        setGasName('');
 
     }
 
@@ -43,31 +46,32 @@ export default function Addbudget() {
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-      
+        p: 4,
     }
     return (
         <div>
 
-            <Modal className='modal' open={open}
+            <Modal open={open}
                 onClose={closeModal}
                 aria-labelledby="Gas"
                 aria-describedby="insert values">
                 <Box sx={style}>
-                    <TextField label='transaction' size='small' variant="standard" value={gasName} onChange={(e) => setGasName(e.target.value)} />
-                    <TextField size='small' label='amount' variant="standard" value={gasA} type={'number'} onChange={(e) => setGasA(e.target.value)} />
-                    <Button variant="contained" onClick={() => handleClose()}>add transaction</Button>
+                    <TextField label={`${budId.category_name} expense`}  size="small" variant='standard'  value={gasName} onChange={(e) => setGasName(e.target.value)} />
+                     <TextField label="amount" size="small" variant='standard' type='number'  value={gasA} onChange={(e) => setGasA(e.target.value)} />
+                    <Button variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
                 </Box>
 
             </Modal>
 
-            <Typography variant='h6'>{budget.map((b, i) => {
+            {budget.map((b, i) => {
+                
                 return (
-                    <div key={i}>
-                        <Button variant="contained" onClick={() => handleOpen(b.id)}>Add {b.category_name}</Button>
-                        <Categorytype b={b} />
+                    <div className='wrapper'  key={i}>
+                        <Button className='buttons' key={i} variant="contained" onClick={() => handleOpen(b)}>Add {b.category_name}</Button>
+                        <Categorytype   b={b} />
                     </div>
                 )
-            })}</Typography>
+            })}
         </div>
     )
 }

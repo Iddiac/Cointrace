@@ -18,6 +18,7 @@ function* addTransaction(action) {
     yield axios.post(`/api/transactions`, action.payload)
     yield put({ type:'FETCH_BUDGET', payload:{monthID: action.payload.monthID} })
     yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
+    yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID} })
   } catch {
     console.error('error adding in addTRANSACTIONS')
   }
@@ -29,6 +30,7 @@ function* deleteTransactions(action) {
     yield axios.delete(`/api/transactions/${action.payload.id}`, action.payload)
     yield put({ type:'FETCH_BUDGET', payload:{monthID: action.payload.monthID} })
     yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
+    yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID} })
   }
   catch {
     console.error('error getting into in transactions delete')

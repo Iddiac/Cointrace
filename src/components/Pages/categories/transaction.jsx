@@ -10,10 +10,11 @@ export default function Transaction({ t }) {
     const dispatch = useDispatch();
     const month = useSelector((store) => store.month);
     return (
-        <div>
-            <div>{t.transactions.map((one, i) => {
+        
+            <div>
+                {t.transactions.map((one, i) => {
                 return (
-                    <div key={i}>
+                    <p key={i}>
                        
                             <Typography variant="h7" color="cadetblue"> <strong> transaction:</strong> {one.name} </Typography>
                             <br />
@@ -23,9 +24,10 @@ export default function Transaction({ t }) {
                             <DeleteIcon  />
                         </IconButton>
 
-                    </div>
+                    </p>
                 )
-            })}</div>
-        </div>
+            })}
+            </div>
+      
     )
 }

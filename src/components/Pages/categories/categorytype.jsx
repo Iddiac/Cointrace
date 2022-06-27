@@ -17,8 +17,9 @@ export default function Categorytype({ b }) {
 
                 if (b.category_name === t.name) {
                     return (
+                        
                         <div key={i}>
-                            <Card style={{ borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
+                            <Card style={{  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                                 <CardContent>
                                    
                                         <Typography className='title' variant="h6" color="orchid"> <strong> {t.name} </strong> </Typography>
