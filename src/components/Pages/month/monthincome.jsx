@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 export default function Monthincome() {
     const dispatch = useDispatch();
     const month = useSelector((store) => store.month);
-    const [income, setIncome] = useState(0);
+    const [income, setIncome] = useState('');
   return (
     <div>
       <Typography variant="h4" color="darkviolet">{month.name}</Typography>

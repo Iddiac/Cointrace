@@ -12,7 +12,7 @@ router.get('/:monthName',rejectUnauthenticated, (req, res) => {
   (SELECT SUM("transactions"."amount") AS "total_sum" FROM transactions
   JOIN "budget" ON "transactions"."budget_id"="budget"."id"
   JOIN "month" on "budget".month_id = "month".id
-  WHERE "month"."name"=$2), 
+  WHERE "month"."name"=$2 AND "transactions".user_id=$1), 
   "user".username, "month".name, "month".id FROM "user"
   JOIN "month" ON "month".user_id="user".id
   WHERE "user".id=$1 AND "month".name=$2` /*this is where i am looking at things */

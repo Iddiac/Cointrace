@@ -12,6 +12,12 @@ function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const month = useSelector((store)=> store.month)
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch({ type: 'FETCH_MONTH', payload: { monthID: month.name } }),
+    dispatch({ type: 'FETCH_TRANSACTIONS', payload: { monthID: month.name } }),
+    dispatch({ type: 'FETCH_BUDGET', payload: { monthID: month.name } })
+  },[])
   return (
 
     <div className="container">
