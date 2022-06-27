@@ -24,14 +24,19 @@ router.get('/:id',rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated,(req, res) => {
   const queryText= `INSERT INTO "budget"("total_amount","user_id","month_id", "category_id")
-  VALUES($1,$2,$3,$4)`;
-      pool.query(queryText,[req.body.total_amount,req.user.id,req.body.month_id, req.body.category_id])
+  VALUES($1,$2,$3,$4),
+  ($1,$2,$3,$5),
+  ($1,$2,$3,$6)`;
+      pool.query(queryText,[0,req.user.id,req.body.monthNum,1,2,3])
       .then((result)=>{
         console.log('this is in server POST for budget', req.body)
           res.sendStatus(201)
       }).catch((err)=>{
-          console.error('not posting in budget', err)
-          res.sendStatus(500)
+         if(err.code = '23505')
+         res.status(201).send('Already loaded')
+         else{
+           res.sendStatus(500);
+         }
       })
 });
 

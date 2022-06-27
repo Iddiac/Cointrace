@@ -21,10 +21,23 @@ function* updateIncome(action) {
     console.error('error getting into in monthSaga put')
   }
 }
+function* addMonth(action) {
+  try {
+    const response = yield axios.post('/api/month', action.payload)
+    console.log('this is in addMonth', response.data)
+    yield put({ type:'FETCH_BUDGET', payload:{monthID:action.payload.monthID} })
+    yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID}})
+    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
+    
+  } catch {
+    console.error('error adding in addMonth')
+  }
+}
 
 function* monthSaga() {
   yield takeLatest('FETCH_MONTH', fetchMonth);
   yield takeLatest('UPDATE_INCOME', updateIncome);
+  yield takeLatest('ADD_MONTH', addMonth);
 }
 
 export default monthSaga;

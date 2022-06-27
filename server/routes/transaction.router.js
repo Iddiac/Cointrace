@@ -44,7 +44,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   WHERE "transactions"."user_id"=$1 -- current user
   AND "month"."name"=$2 -- for the month of may
   GROUP BY "category"."id"
-  ORDER BY "category"."id"
   `
   //AND "budget"."month_id"='1'
 

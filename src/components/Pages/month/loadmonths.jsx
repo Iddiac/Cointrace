@@ -11,6 +11,7 @@ import ListItem from '@mui/material/ListItem';
 
 export default function Loadmonths() {
     const user = useSelector((store) => store.user);
+    const month = useSelector((store) => store.month);
     const dispatch = useDispatch();
     const [isOpen,setIsOpen]= useState(false);
 
@@ -20,6 +21,8 @@ export default function Loadmonths() {
             dispatch({ type: 'FETCH_MONTH', payload: { monthID: currentMonth } }),
             dispatch({ type: 'FETCH_TRANSACTIONS', payload: { monthID: currentMonth } }),
             dispatch({ type: 'FETCH_BUDGET', payload: { monthID: currentMonth } })
+            dispatch({ type: 'ADD_MONTH', payload: { monthID: currentMonth } })
+            dispatch({ type: 'ADD_BUDGET', payload: { monthNum:month.id, monthID:currentMonth } })
     }
     return (
 

@@ -25,9 +25,22 @@ function* updateTotal(action) {
   }
 }
 
+function* addBudget(action) {
+  try {
+    const response = yield axios.post('/api/budget', action.payload)
+    console.log('this is in addBudget', response.data)
+    yield put({ type:'FETCH_BUDGET', payload:{monthID:action.payload.monthID} })
+    yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID}})
+    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
+  } catch {
+    console.error('error adding in addBudget')
+  }
+}
+
 function* budgetSaga() {
   yield takeLatest('FETCH_BUDGET', fetchBudget);
   yield takeLatest('UPDATE_BUDGET', updateTotal);
+  yield takeLatest('ADD_BUDGET', addBudget);
 }
 
 export default budgetSaga;

@@ -28,16 +28,20 @@ router.get('/:monthName',rejectUnauthenticated, (req, res) => {
 
 
 router.post('/', rejectUnauthenticated,(req, res) => {
+  console.log('this is req.body in router post month', req.body)
   const queryText= `INSERT INTO "month"("user_id", "name","monthly_income")
   VALUES($1,$2,$3)`
-      pool.query(queryText,[req.user.id,req.body.name,req.body.monthly_income])
+      pool.query(queryText,[req.user.id,req.body.monthID,0])
       .then((result)=>{
       console.log('month post works')
           res.sendStatus(201)
       }).catch((err)=>{
-          console.error('month function is not working in month post', err)
-          res.sendStatus(500)
-      })
+        if(err.code === '23505')
+          res.status(201).send('Already loaded')
+      else{
+        res.sendStatus(500);
+      }
+    })
 });
 
 router.put('/:id', (req,res)=>{
