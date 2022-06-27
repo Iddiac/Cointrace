@@ -14,7 +14,7 @@ function* fetchBudget(action) {
 function* updateTotal(action) {
   try {
     yield axios.put(`/api/budget/${action.payload.id}`, action.payload)
-    console.log('DANCING MONKEY WOOO')
+    console.log('DANCING MONKEY WOOO', action.payload)
 
     const month = yield select(state => state.month);
     yield put({ type:'FETCH_BUDGET', payload:{monthID: month.name} })

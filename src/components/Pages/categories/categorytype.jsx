@@ -17,20 +17,19 @@ export default function Categorytype({ b }) {
 
                 if (b.category_name === t.name) {
                     return (
-                        
                         <div key={i}>
                             <Card style={{  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                                 <CardContent>
-                                   
+                                    {console.log('this is t', t)}
                                         <Typography className='title' variant="h6" color="orchid"> <strong> {t.name} </strong> </Typography>
-                                        <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {t.total_amount} </Typography>
+                                        <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
                                         <br />
                                         <Typography variant='h4' color="darkmagenta">Expenses</Typography>
                                     <hr />
                                         <Typography variant="subtitle1" color="crimson"> <Transaction t={t} /></Typography>
                                   
-                                    <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color="warning" variant="determinate" value={(t.total_spent / t.total_amount) * 100} />
-                                    <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {t.total_amount}</Typography>
+                                    <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color="warning" variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
+                                    <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {b.total_amount}</Typography>
                                 </CardContent>
                             </Card>
                         </div>
