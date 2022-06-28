@@ -11,6 +11,21 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 export default function Categorytype({ b }) {
     const transactions = useSelector((store) => store.transactions)
+
+    function progressColor(amount, max){
+        let ratio= ((amount/ max) * 100)
+        console.log('this is ratio',ratio)
+
+        if(ratio <= 40){return "success"}
+        else if(ratio >= 41 && ratio< 75){return "warning"}
+        else{
+            return "error"
+            
+            
+        }
+       
+
+    }
     return (
         <div className='wrapper'>
             <div>{transactions.map((t, i) => {
@@ -18,9 +33,8 @@ export default function Categorytype({ b }) {
                 if (b.category_name === t.name) {
                     return (
                         <div key={i}>
-                            <Card style={{  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
+                            <Card  style={{  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                                 <CardContent>
-                                    {console.log('this is t', t)}
                                         <Typography className='title' variant="h6" color="orchid"> <strong> {t.name} </strong> </Typography>
                                         <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
                                         <br />
@@ -28,7 +42,7 @@ export default function Categorytype({ b }) {
                                     <hr />
                                         <Typography variant="subtitle1" color="crimson"> <Transaction t={t} /></Typography>
                                   
-                                    <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color="warning" variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
+                                    <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color={progressColor(t.total_spent,b.total_amount)} variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
                                     <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {b.total_amount}</Typography>
                                 </CardContent>
                             </Card>
