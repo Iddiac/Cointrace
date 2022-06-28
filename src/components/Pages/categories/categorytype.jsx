@@ -6,20 +6,27 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import LinearProgress from '@mui/material/LinearProgress';
+import { red } from '@mui/material/colors';
 
 
 
 export default function Categorytype({ b }) {
     const transactions = useSelector((store) => store.transactions)
+    const reds= [];
 
     function progressColor(amount, max){
+        
         let ratio= ((amount/ max) * 100)
+        
         console.log('this is ratio',ratio)
 
         if(ratio <= 40){return "success"}
         else if(ratio >= 41 && ratio< 75){return "warning"}
         else{
-            return "error"
+            return(
+                reds.push(red[100]),
+                "error"
+                )
             
             
         }
@@ -33,7 +40,7 @@ export default function Categorytype({ b }) {
                 if (b.category_name === t.name) {
                     return (
                         <div key={i}>
-                            <Card  style={{  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
+                            <Card  style={{backgroundColor:reds,  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                                 <CardContent>
                                         <Typography className='title' variant="h6" color="orchid"> <strong> {t.name} </strong> </Typography>
                                         <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
