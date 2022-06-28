@@ -67,7 +67,7 @@ export default function Addbudget() {
                 
                 return (
                     <div className='wrapper'  key={i}>
-                        <Button color="success" className='buttons' key={i} variant="contained" onClick={() => handleOpen(b)}>Add {b.category_name}</Button>
+                       
                         <Categorytype  b={b} />
                     </div>
                 )

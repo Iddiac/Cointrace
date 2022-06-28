@@ -5,26 +5,68 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
+import {useState} from 'react'
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { red } from '@mui/material/colors';
+import AddIcon from '@mui/icons-material/Add';
 
 
 
 export default function Categorytype({ b }) {
     const transactions = useSelector((store) => store.transactions)
-    const reds= [];
+    const colorz= [];
 
+
+    const [budId, setBudId] = useState(0)
+    const [catName, setCatName] = useState('')
+    const [open, setOpen] = useState(false)
+    const [gasName, setGasName] = useState('');
+    const [gasA, setGasA] = useState(0);
+    const dispatch = useDispatch();
+    const budget = useSelector((store) => store.budget)
+    const month = useSelector((store) => store.month)
+
+
+    function handleOpen(b) {
+        setOpen(true); 
+        setBudId(b);
+    };
+    const handleClose = () => {
+        dispatch({ type: 'ADD_TRANSACTIONS', payload: { monthID: month.name, name: gasName, amount: gasA, budget_id: budId.id } })
+        setOpen(false);
+        setGasA(0);
+        setGasName('');
+
+    }
+
+    const closeModal = () => setOpen(false);
+
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    }
     function progressColor(amount, max){
         
         let ratio= ((amount/ max) * 100)
         
-        console.log('this is ratio',ratio)
 
         if(ratio <= 40){return "success"}
         else if(ratio >= 41 && ratio< 75){return "warning"}
         else{
             return(
-                reds.push(red[100]),
+                colorz.push(red[100]),
                 "error"
                 )
             
@@ -35,18 +77,36 @@ export default function Categorytype({ b }) {
     }
     return (
         <div className='wrapper'>
-            <div>{transactions.map((t, i) => {
+             <div>
 
+<Modal open={open}
+    onClose={closeModal}
+    aria-labelledby="Gas"
+    aria-describedby="insert values">
+    <Box sx={style}>
+        <TextField label={`${budId.category_name} expense`}  size="small" variant='standard'  value={gasName} onChange={(e) => setGasName(e.target.value)} />
+         <TextField label="amount" size="small" variant='standard' type='number'  value={gasA} onChange={(e) => setGasA(e.target.value)} />
+        <Button color="secondary" variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
+    </Box>
+
+</Modal>
+
+
+
+</div>
+            <div>{transactions.map((t, i) => {
+                
                 if (b.category_name === t.name) {
                     return (
                         <div key={i}>
-                            <Card  style={{backgroundColor:reds,  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
+                            <Card  style={{backgroundColor:colorz,  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                                 <CardContent>
-                                        <Typography className='title' variant="h6" color="orchid"> <strong> {t.name} </strong> </Typography>
-                                        <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
+                                        <Typography  variant="h6" color="orchid"> <strong>  </strong> </Typography>
                                         <br />
-                                        <Typography variant='h4' color="darkmagenta">Expenses</Typography>
+                                        <Typography variant='h4' color="darkmagenta">{t.name}</Typography>
+                                        <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
                                     <hr />
+                                     <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => handleOpen(b)} />
                                         <Typography variant="subtitle1" color="crimson"> <Transaction t={t} /></Typography>
                                   
                                     <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color={progressColor(t.total_spent,b.total_amount)} variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
