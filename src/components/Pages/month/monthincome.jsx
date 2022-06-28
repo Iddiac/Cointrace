@@ -15,7 +15,7 @@ export default function Monthincome() {
     <br />
      income: {month.monthly_income}
     <TextField size="small" variant='standard' value={income} onChange={(event) => setIncome(event.target.value)} />
-    <Button variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome(0)}}>change</Button>
+    <Button color='secondary' variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome(0)}}>change</Button>
     </div>
   )
 }

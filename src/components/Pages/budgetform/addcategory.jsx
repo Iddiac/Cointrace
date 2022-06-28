@@ -58,7 +58,7 @@ export default function Addbudget() {
                 <Box sx={style}>
                     <TextField label={`${budId.category_name} expense`}  size="small" variant='standard'  value={gasName} onChange={(e) => setGasName(e.target.value)} />
                      <TextField label="amount" size="small" variant='standard' type='number'  value={gasA} onChange={(e) => setGasA(e.target.value)} />
-                    <Button variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
+                    <Button color="secondary" variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
                 </Box>
 
             </Modal>
@@ -67,7 +67,7 @@ export default function Addbudget() {
                 
                 return (
                     <div className='wrapper'  key={i}>
-                        <Button className='buttons' key={i} variant="contained" onClick={() => handleOpen(b)}>Add {b.category_name}</Button>
+                        <Button color="success" className='buttons' key={i} variant="contained" onClick={() => handleOpen(b)}>Add {b.category_name}</Button>
                         <Categorytype  b={b} />
                     </div>
                 )
