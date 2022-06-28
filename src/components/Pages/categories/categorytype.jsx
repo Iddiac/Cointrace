@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import LinearProgress from '@mui/material/LinearProgress';
-import {useState} from 'react'
+import { useState, useEffect } from 'react'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,9 +16,11 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 
+
+
 export default function Categorytype({ b }) {
     const transactions = useSelector((store) => store.transactions)
-    const colorz= [];
+    const colorz = [];
 
 
     const [budId, setBudId] = useState(0)
@@ -31,10 +33,12 @@ export default function Categorytype({ b }) {
     const month = useSelector((store) => store.month)
 
 
+
     function handleOpen(b) {
-        setOpen(true); 
+        setOpen(true);
         setBudId(b);
     };
+
     const handleClose = () => {
         dispatch({ type: 'ADD_TRANSACTIONS', payload: { monthID: month.name, name: gasName, amount: gasA, budget_id: budId.id } })
         setOpen(false);
@@ -56,69 +60,72 @@ export default function Categorytype({ b }) {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-    }
-    function progressColor(amount, max){
-        
-        let ratio= ((amount/ max) * 100)
-        
+    };
 
-        if(ratio <= 40){return "success"}
-        else if(ratio >= 41 && ratio< 75){return "warning"}
-        else{
-            return(
+    function progressColor(amount, max) {
+
+        let ratio = ((amount / max) * 100)
+
+
+        if (ratio <= 40) { return "success" }
+        else if (ratio >= 41 && ratio < 75) { return "warning" }
+        else {
+            return (
                 colorz.push(red[100]),
                 "error"
-                )
-            
-            
+            )
         }
-       
 
     }
+    useEffect(() => {
+        console.log(b)
+    }, [])
+
+
     return (
         <div className='wrapper'>
-             <div>
+            <div>
 
-<Modal open={open}
-    onClose={closeModal}
-    aria-labelledby="Gas"
-    aria-describedby="insert values">
-    <Box sx={style}>
-        <TextField label={`${budId.category_name} expense`}  size="small" variant='standard'  value={gasName} onChange={(e) => setGasName(e.target.value)} />
-         <TextField label="amount" size="small" variant='standard' type='number'  value={gasA} onChange={(e) => setGasA(e.target.value)} />
-        <Button color="secondary" variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
-    </Box>
+                <Modal open={open}
+                    onClose={closeModal}
+                    aria-labelledby="Gas"
+                    aria-describedby="insert values">
+                    <Box sx={style}>
+                        <TextField label={`${budId.category_name} expense`} size="small" variant='standard' value={gasName} onChange={(e) => setGasName(e.target.value)} />
+                        <TextField label="amount" size="small" variant='standard' type='number' value={gasA} onChange={(e) => setGasA(e.target.value)} />
+                        <Button color="secondary" variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
+                    </Box>
 
-</Modal>
+                </Modal>
 
 
 
-</div>
-            <div>{transactions.map((t, i) => {
-                
-                if (b.category_name === t.name) {
-                    return (
-                        <div key={i}>
-                            <Card  style={{backgroundColor:colorz,  borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
-                                <CardContent>
-                                        <Typography  variant="h6" color="orchid"> <strong>  </strong> </Typography>
-                                        <br />
-                                        <Typography variant='h4' color="darkmagenta">{t.name}</Typography>
-                                        <Typography  className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
+            </div>
+            <Card style={{ backgroundColor: colorz, borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
+                <CardContent>
+                    <Typography variant="h6" color="orchid"> <strong>  </strong> </Typography>
+                    <Typography className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
+                    <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => handleOpen(b)} />
+                    <Typography variant='h4' color="darkmagenta">{b.category_name}</Typography>
+                <div>{transactions.map((t, i) => {
+                    if (b.category_name === t.name) {
+                        return (
+
+                            <div key={i}>
+                                    <br />
                                     <hr />
-                                     <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => handleOpen(b)} />
-                                        <Typography variant="subtitle1" color="crimson"> <Transaction t={t} /></Typography>
-                                  
-                                    <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color={progressColor(t.total_spent,b.total_amount)} variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
-                                    <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {b.total_amount}</Typography>
-                                </CardContent>
-                            </Card>
-                        </div>
+                                    <Typography variant="subtitle1" color="crimson"> <Transaction t={t} /></Typography>
 
-                    )
-                }
-            })
-            }</div>
+                                    <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color={progressColor(t.total_spent, b.total_amount)} variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
+                                    <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {b.total_amount}</Typography>
+                            </div>
+
+)
+}
+})
+}</div>
+</CardContent>
+            </Card>
         </div>
     )
 }

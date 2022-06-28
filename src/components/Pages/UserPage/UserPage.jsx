@@ -27,7 +27,7 @@ function UserPage() {
       <h2 className='welcome'>Welcome, {user.username}!</h2>
       <Monthincome />
       <Budgetform />
-      <h3 className='totalleft'> <span>You've spent ${month.total_sum}/{month.monthly_income}</span></h3>
+      <h3 className='totalleft'> <span>You've spent ${month.total_sum}/${month.monthly_income}</span></h3>
       <h4 className='moneyremaining'>remaining:${month.monthly_income - month.total_sum}</h4>
       <Addbudget/>
       <LogOutButton className="btn" />
