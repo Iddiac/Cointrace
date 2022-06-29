@@ -23,6 +23,7 @@ router.get('/:id',rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated,(req, res) => {
+  console.log("!!!!!!!!!", req.body)
   const queryText= `INSERT INTO "budget"("total_amount","user_id","month_id", "category_id")
   VALUES($1,$2,$3,$4),
   ($1,$2,$3,$5),

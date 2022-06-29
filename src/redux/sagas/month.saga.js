@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
 
 
 function* fetchMonth(action) {
@@ -24,10 +24,7 @@ function* updateIncome(action) {
 function* addMonth(action) {
   try {
     const response = yield axios.post('/api/month', action.payload)
-    console.log('this is in addMonth', response.data)
-    yield put({ type:'FETCH_BUDGET', payload:{monthID:action.payload.monthID} })
     yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID}})
-    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
     
   } catch {
     console.error('error adding in addMonth')
