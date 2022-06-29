@@ -7,6 +7,8 @@ function* fetchMonth(action) {
     const response = yield axios.get(`/api/month/${action.payload.monthID}`)
     console.log('this is response data in monthSaga', response.data)
     yield put({ type: 'GET_MONTH', payload: response.data })
+    yield put({ type:'FETCH_BUDGET', payload:{monthID:action.payload.monthID} })
+    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
   } catch {
     console.error('error getting into in monthSaga')
   }

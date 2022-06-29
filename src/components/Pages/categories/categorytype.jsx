@@ -91,7 +91,8 @@ export default function Categorytype({ b }) {
                     aria-labelledby="Gas"
                     aria-describedby="insert values">
                     <Box sx={style}>
-                        <TextField label={`${budId.category_name} expense`} size="small" variant='standard' value={gasName} onChange={(e) => setGasName(e.target.value)} />
+                        <h2>{budId.category_name} Expense</h2>
+                        <TextField label={`name`} size="small" variant='standard' value={gasName} onChange={(e) => setGasName(e.target.value)} />
                         <TextField label="amount" size="small" variant='standard' type='number' value={gasA} onChange={(e) => setGasA(e.target.value)} />
                         <Button color="secondary" variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
                     </Box>
