@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { purple, red, blueGrey } from '@mui/material/colors';
+import { Link } from 'react-router-dom';
+import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
+
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../../Auth/RegisterForm/RegisterForm';
@@ -19,40 +29,24 @@ function LandingPage() {
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
+          <Box sx={{ width: '100%', maxWidth: 700 }}>
+            <Typography mt={'5%'} ml={'15%'} color={blueGrey[800]} variant="h4" gutterBottom component="div">
+             <strong> Cost and Budget tracking software for Savvy Indivisuals Who Want to Achive Financial Freedom </strong>
+            </Typography>
+            <Typography ml={'15%'} color={blueGrey[800]} variant="subtitle1" gutterBottom component="div">
+            There are endless ways to spend money. You deserve better tools to save your money. That's our mission!
+            </Typography>
+            <Link to="/about">
+            <Typography ml={'15%'} color={blueGrey[800]} variant="subtitle1" gutterBottom component="div">
+              <ChevronRightTwoToneIcon />About
+            </Typography>
+        </Link>
+          </Box>
 
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
 
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
         </div>
         <div className="grid-col grid-col_4">
-          <RegisterForm />
+        <RegisterForm />
 
           <center>
             <h4>Already a Member?</h4>

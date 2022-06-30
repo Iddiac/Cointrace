@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../../Auth/LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import Cointrace from '../../App/Cointrace graphics/CoinTraceLogo.svg'
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -10,7 +11,7 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Budget Tracker 9000</h2>
+        <img src={Cointrace} className="nav-title"></img>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}

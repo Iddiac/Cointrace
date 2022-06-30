@@ -106,26 +106,26 @@ export default function Categorytype({ b }) {
                 <CardContent>
                     <Typography variant="h6" color="orchid"> <strong>  </strong> </Typography>
                     <Typography className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
-                    <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => handleOpen(b)} />
+                    <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => { b.total_amount>0 ? handleOpen(b) : alert("insert a value")}} />
                     <Typography variant='h4' color="darkmagenta">{b.category_name}</Typography>
-                <div>{transactions.map((t, i) => {
-                    if (b.category_name === t.name) {
-                        return (
+                    <div>{transactions.map((t, i) => {
+                        if (b.category_name === t.name) {
+                            return (
 
-                            <div key={i}>
+                                <div key={i}>
                                     <br />
                                     <hr />
                                     <Typography variant="subtitle1" color="crimson"> <Transaction t={t} /></Typography>
 
                                     <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color={progressColor(t.total_spent, b.total_amount)} variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
                                     <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {b.total_amount}</Typography>
-                            </div>
+                                </div>
 
-)
-}
-})
-}</div>
-</CardContent>
+                            )
+                        }
+                    })
+                    }</div>
+                </CardContent>
             </Card>
         </div>
     )
