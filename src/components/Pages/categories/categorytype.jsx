@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { red } from '@mui/material/colors';
+import { red,indigo,teal,cyan } from '@mui/material/colors';
 import AddIcon from '@mui/icons-material/Add';
 
 
@@ -67,8 +67,15 @@ export default function Categorytype({ b }) {
         let ratio = ((amount / max) * 100)
 
 
-        if (ratio <= 40) { return "success" }
-        else if (ratio >= 41 && ratio < 75) { return "warning" }
+        if (ratio <= 40) { return (
+            colorz.push(cyan[50]),
+             "success"
+        )
+        }
+        else if (ratio >= 41 && ratio < 75) { return( 
+            colorz.push(cyan[50]),
+            "warning" 
+        )}
         else {
             return (
                 colorz.push(red[100]),

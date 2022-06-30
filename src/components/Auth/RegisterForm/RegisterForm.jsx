@@ -4,6 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 
 function RegisterForm() {
@@ -57,7 +59,8 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+      <Button style={{backgroundColor:'#616283', color:"white"}} className="btn" type="submit" name="submit" value="Register">Register</Button>
+
       </div>
     </form>
   );

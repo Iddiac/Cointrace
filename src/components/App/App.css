@@ -20,7 +20,7 @@ Container
 
 .container {
   padding: 20px;
-
+  background-color: beige;
 }
 
 /* --------------------------------------------------------------------------------
@@ -32,8 +32,8 @@ Button
   padding: 10px 20px;
   border-color: #014041;
   border-width: 1px 1px 3px;
-  border-radius: 4px;
-  background-color: #9F86C0;
+  border-radius: 2em;
+  background-color:#374A67 ;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -98,13 +98,14 @@ Form Treatment
 
 .formPanel {
   box-sizing: border-box;
-  width: 400px;
+  color: white;
+  width: 20em;
   max-width: 100%;
-  padding: 25px;
-  margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  padding: 2em;
+  margin: 0 auto 1em;
+  background-color: #374A67;
+  border-radius: 30px;
+  box-shadow: 0 .5 1em rgb(0, 0, 0, 0.4);
 }
 
 input {
@@ -137,7 +138,7 @@ input {
 
 .plus:hover{
   color: red;
-    transition: 0.9s;
+    transition: 0.3s;
     transform: rotateY(180deg);
     cursor:pointer;
   
@@ -161,5 +162,21 @@ color: darkorchid;
 }
 
 .logo{
-  width: 20em;
+  width: 24em;
+  margin-left: 34%;
+
+}
+
+.all{
+  background-color: beige;
+}
+
+.logoimages{
+  margin-top: 23em;
+  width: 5em;
+}
+
+.instructions{
+  text-align: center;
+  color: black;
 }

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -57,7 +62,7 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <Button style={{backgroundColor:'#616283', color:"white"}} className="btn" type="submit" name="submit" value="Log In"> Log in</Button>
       </div>
     </form>
   );

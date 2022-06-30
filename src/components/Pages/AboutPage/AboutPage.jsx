@@ -1,17 +1,32 @@
 import React from 'react';
+import linkedin from '../../App/Cointrace graphics/linkedin logo.png'
+import Cointrace from '../../App/Cointrace graphics/CoinTraceLogo.svg'
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
+
+
 
 function AboutPage() {
   return (
-    <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
-      </div>
+    <>
+
+    <img src={Cointrace} className='logo'></img>
+    <div className='instructions'>
+        <h2>1. Input your Monthy Income</h2>
+        <h2>2. Input Budgets for Categories </h2>
+        <h2>3. Click Plus Sign to add Expenses</h2>
+        <h2>4. Save Money</h2>
+        <Link to="/user">
+            <Button style={{ backgroundColor: '#616283', color: "white", padding: ".8em" }}>
+                Get Started NOW!
+            </Button>
+        </Link>
     </div>
+
+
+
+</>
   );
 }
 

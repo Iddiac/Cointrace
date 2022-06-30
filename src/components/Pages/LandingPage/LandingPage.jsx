@@ -15,6 +15,9 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Button from '@mui/material/Button';
+import Cointrace from '../../App/Cointrace graphics/CoinTraceLogo.svg'
+
 
 
 
@@ -34,12 +37,13 @@ function LandingPage() {
   };
 
   return (
-    <div className="container">
+    <div className="mainLanding">
 
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-          <Box sx={{ width: '100%', maxWidth: 700 }}>
+          <Box  sx={{ width: '100%', maxWidth: 700 }}>
+            <div>
             <Typography mt={'5%'} ml={'15%'} color={blueGrey[800]} variant="h4" gutterBottom component="div">
               <strong> Cost and Budget tracking software for Savvy Indivisuals Who Want to Achive Financial Freedom </strong>
             </Typography>
@@ -51,13 +55,17 @@ function LandingPage() {
                 <ChevronRightTwoToneIcon />About
               </Typography>
             </Link>
+              </div>
+
           </Box>
 
 
         </div>
+
+
         <div className="grid-col grid-col_4">
 
-        <Box sx={{ width: '100%', typography: 'body1' }}>
+        <Box  sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} >
@@ -77,9 +85,11 @@ function LandingPage() {
 
           <center>
             <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
+            
+            <Button style={{backgroundColor:'#616283', color:"white"}} className="btn btn_sizeSm" onClick={onLogin}>
+               Log in
+               </Button>
+           
           </center>
         </div>
       </div>

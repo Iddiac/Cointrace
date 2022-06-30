@@ -25,7 +25,6 @@ export default function Addbudget() {
         <div>
 
            
-
             {budget.map((b, i) => {
                 
                 return (

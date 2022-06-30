@@ -15,7 +15,6 @@ import ProtectedRoute from '../Shared/ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../Pages/AboutPage/AboutPage';
 import UserPage from '../Pages/UserPage/UserPage';
-import InfoPage from '../Pages/InfoPage/InfoPage';
 import LandingPage from '../Pages/LandingPage/LandingPage';
 import LoginPage from '../Auth/LoginPage/LoginPage';
 import RegisterPage from '../Auth/RegisterPage/RegisterPage';
@@ -53,6 +52,7 @@ function App() {
             <AboutPage />
           </Route>
 
+        
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -64,15 +64,10 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+          
 
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
 
+         
           <Route
             exact
             path="/login"
@@ -94,7 +89,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/about" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
