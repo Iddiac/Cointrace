@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../../Auth/LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
-import Cointrace from '../../App/Cointrace graphics/CoinTraceLogo.svg'
+import Cointrace from '../../App/Cointrace graphics/CoinTraceLogoWithWhite.svg'
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -35,7 +35,7 @@ function Nav() {
         )}
 
         <Link className="navLink" to="/about">
-          About
+          Instructions
         </Link>
       </div>
     </div>

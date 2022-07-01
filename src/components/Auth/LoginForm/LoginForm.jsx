@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+import {useHistory} from 'react-router-dom'
 
 
 function LoginForm() {
@@ -12,6 +13,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const login = (event) => {
     event.preventDefault();
@@ -24,6 +26,7 @@ function LoginForm() {
           password: password,
         },
       });
+      history.push('/about')
     } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }

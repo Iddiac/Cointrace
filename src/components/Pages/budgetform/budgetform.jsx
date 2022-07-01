@@ -14,7 +14,7 @@ function Budgetform(){
     const [entertainmentTotal, setEntertainmentTotal] = useState('');
     return(
       <div >
-        <Card className='monthadd' style={{padding:'1em',backgroundColor:"#374A67", color:"#374A67", borderRadius: 10, textAlign:"center" }} sx={{ minWidth: 200,maxWidth:275}} variant="outlined">
+        <Card className='monthadd' style={{padding:'1em',backgroundColor:"#3CC6F0", color:"#374A67", borderRadius: 10, textAlign:"center" }} sx={{ minWidth: 200,maxWidth:275}} variant="outlined">
         <TextField color="warning" sx={{ input: { color: 'white' } }}  size="small"  className="outlined-basic" label="Gas" type='number' variant="standard" value={gasTotal} onChange={(event) => setGasTotal(event.target.value)}/>  
         <Button style={{color:"white"}}  size='small' onClick={() => {dispatch({ type: "UPDATE_BUDGET", payload: { id: 1, monthID: month.id, categoryId: 1, total: gasTotal } });setGasTotal(0)}}>change Gas total</Button>
 

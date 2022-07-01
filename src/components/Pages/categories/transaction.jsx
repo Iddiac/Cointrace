@@ -16,9 +16,9 @@ export default function Transaction({ t }) {
                 return (
                     <p key={i}>
                        
-                            <Typography variant="h7" color="cadetblue"> <strong> transaction:</strong> {one.name} </Typography>
+                            <Typography variant="h7" color="#D7263D"> <strong> transaction:</strong> {one.name} </Typography>
                             <br />
-                            <Typography variant="h7" color="cadetblue"> <strong> spent:</strong> {one.amount} </Typography>
+                            <Typography variant="h7" color="#D7263D"> <strong> spent:</strong> {one.amount} </Typography>
                             <br />
                         <IconButton onClick={() => dispatch({ type: 'DELETE_TRANSACTIONS', payload: { id: one.id, monthID: month.name } })} aria-label="delete" size="large">
                             <DeleteIcon  />

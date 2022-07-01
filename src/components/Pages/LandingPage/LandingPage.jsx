@@ -51,9 +51,9 @@ function LandingPage() {
               There are endless ways to spend money. You deserve better tools to save your money. That's our mission!
             </Typography>
             <Link to="/about">
-              <Typography ml={'15%'} color={blueGrey[800]} variant="subtitle1" gutterBottom component="div">
+              {/* <Typography ml={'15%'} color={blueGrey[800]} variant="subtitle1" gutterBottom component="div">
                 <ChevronRightTwoToneIcon />About
-              </Typography>
+              </Typography> */}
             </Link>
               </div>
 

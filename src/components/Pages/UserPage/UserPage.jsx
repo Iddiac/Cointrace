@@ -10,6 +10,7 @@ import { indigo } from '@mui/material/colors';
 import Cointrace from '../../App/Cointrace graphics/CoinTraceLogo.svg';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 
@@ -75,7 +76,9 @@ const closeModal = () => setOpen(false);
     {/* <img src={Cointrace} className='logo'></img> */}
       <Loadmonths />
 
-      <h2 className='welcome'>Welcome, {user.username}!</h2>
+      <Typography variant="h4" color="#262626">{month.name}</Typography>
+      <h3 className='totalleft'> <span>You've spent ${month.total_sum || 0}/${month.monthly_income|| 0}</span></h3>
+      <h4 >remaining:<span className='moneyremaining'>${month.monthly_income - month.total_sum || 0}</span></h4>
       <div className="grid">
       <div className="grid-col grid-col_3">
       <Monthincome />
@@ -85,8 +88,6 @@ const closeModal = () => setOpen(false);
       <Addbudget/>
       </div>
       </div>
-      <h3 className='totalleft'> <span>You've spent ${month.total_sum || 0}/${month.monthly_income|| 0}</span></h3>
-      <h4 className='moneyremaining'>remaining:${month.monthly_income - month.total_sum || 0}</h4>
       <LogOutButton className="btn" />
     </div>
   );
