@@ -16,6 +16,8 @@ function* addTransaction(action) {
    console.log('this is peanut butter',action.payload)
   try {
     yield axios.post(`/api/transactions`, action.payload)
+    yield put({ type: 'FETCH_MONTH', payload:{monthID:action.payload.monthID} })
+    yield put({ type:'FETCH_BUDGET', payload:{monthID: action.payload.monthID} })
     yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:action.payload.monthID} })
   } catch {
     console.error('error adding in addTRANSACTIONS')

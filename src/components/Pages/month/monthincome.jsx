@@ -1,6 +1,6 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {useState,useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -10,26 +10,27 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
 
-export default function Monthincome() {
-    const dispatch = useDispatch();
-    const month = useSelector((store) => store.month);
-    const [income, setIncome] = useState('');
 
-    useEffect(() => {
-      dispatch({ type: 'ADD_BUDGET', payload: { monthNum:month.id, monthID:month.name } })
-    }, [month])
+export default function Monthincome() {
+  const dispatch = useDispatch();
+  const month = useSelector((store) => store.month);
+  const [income, setIncome] = useState('');
+
+  useEffect(() => {
+    dispatch({ type: 'ADD_BUDGET', payload: { monthNum: month.id, monthID: month.name } })
+  }, [month])
 
 
   return (
     <div>
       <Typography variant="h4" color="darkviolet">{month.name}</Typography>
-    <br />
-    <Card className='monthadd' style={{padding:'4em',backgroundColor:"#82A3A1", color:"white", borderRadius: 10, textAlign:"center" }} sx={{ minWidth: 275,maxWidth:275 }} variant="outlined">
-     income: {month.monthly_income || ''}
-    <TextField size="small" variant='standard' value={income} onChange={(event) => setIncome(event.target.value)} />
-    <Button style={{ color:"white"}} variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome('')}}>change</Button>
-    <Budgetform />
-    </Card>
+      <br />
+      <Card className='monthadd' style={{ padding: '1em', backgroundColor: "#374A67", color: "#374A67", borderRadius: 10, textAlign: "center" }} sx={{ minWidth: 200, maxWidth: 275, maxHeight: 150 }} variant="outlined">
+      <h4 className='FIELDTEXT'> Income: ${month.monthly_income || ''}</h4>
+        <br />
+        <TextField sx={{ input: { color: 'white' } }} type="number" size="small" variant='standard' color="warning" value={income} onChange={(event) => setIncome(event.target.value)} />
+        <Button style={{ color: "white" }} variant='text' onClick={() => { dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome('') }}>change</Button>
+      </Card>
     </div>
   )
 }

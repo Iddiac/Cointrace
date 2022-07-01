@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react'
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { red,indigo,teal,cyan } from '@mui/material/colors';
+import { red, indigo, teal, cyan } from '@mui/material/colors';
 import AddIcon from '@mui/icons-material/Add';
 
 
@@ -58,7 +58,8 @@ export default function Categorytype({ b }) {
         width: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
-        boxShadow: 24,
+        boxShadow: 5,
+        borderRadius:10,
         p: 4,
     };
 
@@ -67,15 +68,18 @@ export default function Categorytype({ b }) {
         let ratio = ((amount / max) * 100)
 
 
-        if (ratio <= 40) { return (
-            colorz.push(cyan[50]),
-             "success"
-        )
+        if (ratio <= 40) {
+            return (
+                colorz.push(cyan[50]),
+                "success"
+            )
         }
-        else if (ratio >= 41 && ratio < 75) { return( 
-            colorz.push(cyan[50]),
-            "warning" 
-        )}
+        else if (ratio >= 41 && ratio < 75) {
+            return (
+                colorz.push(cyan[50]),
+                "warning"
+            )
+        }
         else {
             return (
                 colorz.push(red[100]),
@@ -85,7 +89,6 @@ export default function Categorytype({ b }) {
 
     }
     useEffect(() => {
-        console.log(b)
     }, [])
 
 
@@ -99,8 +102,8 @@ export default function Categorytype({ b }) {
                     aria-describedby="insert values">
                     <Box sx={style}>
                         <h2>{budId.category_name} Expense</h2>
-                        <TextField label={`name`} size="small" variant='standard' value={gasName} onChange={(e) => setGasName(e.target.value)} />
-                        <TextField label="amount" size="small" variant='standard' type='number' value={gasA} onChange={(e) => setGasA(e.target.value)} />
+                        <TextField label={`Title`} size="small" variant='standard' value={gasName} onChange={(e) => setGasName(e.target.value)} />
+                        <TextField label="Amount" size="small" variant='standard' type='number' placeholder='' value={gasA} onChange={(e) => setGasA(e.target.value)} />
                         <Button color="secondary" variant="contained" onClick={() => handleClose()}>add {budId.category_name} </Button>
                     </Box>
 
@@ -109,11 +112,12 @@ export default function Categorytype({ b }) {
 
 
             </div>
+
             <Card style={{ backgroundColor: colorz, borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                 <CardContent>
                     <Typography variant="h6" color="orchid"> <strong>  </strong> </Typography>
                     <Typography className='total_amount' variant="h7" color="cadetblue"> <strong> budget: </strong> {b.total_amount} </Typography>
-                    <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => { b.total_amount>0 ? handleOpen(b) : alert("insert a value")}} />
+                    <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => { handleOpen(b) }} />
                     <Typography variant='h4' color="darkmagenta">{b.category_name}</Typography>
                     <div>{transactions.map((t, i) => {
                         if (b.category_name === t.name) {
@@ -134,6 +138,7 @@ export default function Categorytype({ b }) {
                     }</div>
                 </CardContent>
             </Card>
+
         </div>
     )
 }

@@ -62,7 +62,6 @@ const closeModal = () => setOpen(false);
     aria-describedby="insert values">
     <Box sx={style}>
     <Monthincome />
-        <Button color="secondary" variant="contained" onClick={() => handleClose()}>Finish  </Button>
     </Box>
 
 </Modal>
@@ -77,8 +76,15 @@ const closeModal = () => setOpen(false);
       <Loadmonths />
 
       <h2 className='welcome'>Welcome, {user.username}!</h2>
+      <div className="grid">
+      <div className="grid-col grid-col_3">
       <Monthincome />
+      <Budgetform />
+      </div>
+      <div className="grid-col grid-col_9">
       <Addbudget/>
+      </div>
+      </div>
       <h3 className='totalleft'> <span>You've spent ${month.total_sum || 0}/${month.monthly_income|| 0}</span></h3>
       <h4 className='moneyremaining'>remaining:${month.monthly_income - month.total_sum || 0}</h4>
       <LogOutButton className="btn" />
