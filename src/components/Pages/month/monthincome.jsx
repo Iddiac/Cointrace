@@ -24,7 +24,7 @@ export default function Monthincome() {
     <div>
       <Typography variant="h4" color="darkviolet">{month.name}</Typography>
     <br />
-    <Card  style={{backgroundColor:"#82A3A1", color:"white", borderRadius: 10, textAlign:"center" }} sx={{ minWidth: 275,maxWidth:275 }} variant="outlined">
+    <Card className='monthadd' style={{padding:'4em',backgroundColor:"#82A3A1", color:"white", borderRadius: 10, textAlign:"center" }} sx={{ minWidth: 275,maxWidth:275 }} variant="outlined">
      income: {month.monthly_income || ''}
     <TextField size="small" variant='standard' value={income} onChange={(event) => setIncome(event.target.value)} />
     <Button style={{ color:"white"}} variant='text' onClick={() => {dispatch({ type: "UPDATE_INCOME", payload: { monthID: month.name, id: month.id, income } }); setIncome('')}}>change</Button>
