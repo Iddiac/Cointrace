@@ -27,7 +27,6 @@ function* updateTotal(action) {
 
 function* addBudget(action) {
   try {
-    console.log('........!!!DSAD..',action.payload)
     const response = yield axios.post('/api/budget', action.payload)
    
     yield put({ type:'FETCH_BUDGET', payload:{monthID:action.payload.monthID} })

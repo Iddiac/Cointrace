@@ -18,8 +18,8 @@ export default function Loadmonths() {
 
 
     const Months = (currentMonth,monthNum) => {
-        console.log('adsasdadadsasdasd',monthNum),
-        dispatch({ type: 'ADD_MONTH', payload: { monthID: currentMonth } })
+
+        dispatch({ type: 'ADD_MONTH', payload: { monthID: currentMonth, monthNum} })
         
     }
 

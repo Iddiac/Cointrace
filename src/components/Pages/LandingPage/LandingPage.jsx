@@ -45,7 +45,7 @@ function LandingPage() {
           <Box  sx={{ width: '100%', maxWidth: 700 }}>
             <div>
             <Typography mt={'5%'} ml={'15%'} color={blueGrey[800]} variant="h4" gutterBottom component="div">
-              <strong> Cost and Budget tracking software for Savvy Indivisuals Who Want to Achive Financial Freedom </strong>
+              <strong> Cost and Budget tracking software for Savvy Individual Who Want to Achive Financial Freedom </strong>
             </Typography>
             <Typography ml={'15%'} color={blueGrey[800]} variant="subtitle1" gutterBottom component="div">
               There are endless ways to spend money. You deserve better tools to save your money. That's our mission!

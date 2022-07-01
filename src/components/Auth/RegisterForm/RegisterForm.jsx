@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useHistory } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 
@@ -11,11 +12,13 @@ import Button from '@mui/material/Button';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
     event.preventDefault();
+    history.push('/about');
 
     dispatch({
       type: 'REGISTER',

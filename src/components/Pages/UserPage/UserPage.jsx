@@ -28,7 +28,7 @@ function UserPage() {
     <div className="container">
     <Loadmonths />
       <h2 className='welcome'>Welcome, {user.username}!</h2>
-      <h2>please fill out the form below in order to get your budgets</h2>
+      <h2>please add budgets below</h2>
       <Monthincome /> 
       <LogOutButton className="btn" />
     </div>
