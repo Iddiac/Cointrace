@@ -62,6 +62,7 @@ const closeModal = () => setOpen(false);
     aria-labelledby="Gas"
     aria-describedby="insert values">
     <Box sx={style}>
+    <Typography  variant="h6" color="#262626"> Please Input Monthly Income</Typography>
     <Monthincome />
     </Box>
 
@@ -76,9 +77,10 @@ const closeModal = () => setOpen(false);
     {/* <img src={Cointrace} className='logo'></img> */}
       <Loadmonths />
 
-      <Typography variant="h4" color="#262626">{month.name}</Typography>
-      <h3 className='totalleft'> <span>You've spent ${month.total_sum || 0}/${month.monthly_income|| 0}</span></h3>
-      <h4 >remaining:<span className='moneyremaining'>${month.monthly_income - month.total_sum || 0}</span></h4>
+      <Typography className='MonthTitle' variant="h3" color="#262626">{month.name}</Typography>
+      <Typography variant='h6' className='totalleft'>You've spent:<span className='moneyremaining'>${month.total_sum || 0}/${month.monthly_income|| 0}</span></Typography>
+      <Typography variant='h6'>remaining:<span className='moneyremaining'>${month.monthly_income - month.total_sum || 0}</span></Typography>
+      <br />
       <div className="grid">
       <div className="grid-col grid-col_3">
       <Monthincome />

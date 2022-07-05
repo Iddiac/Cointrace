@@ -28,10 +28,13 @@ export default function Categorytype({ b }) {
     const [catName, setCatName] = useState('')
     const [open, setOpen] = useState(false)
     const [gasName, setGasName] = useState('');
+  let totalspent=0;
     const [gasA, setGasA] = useState(0);
     const dispatch = useDispatch();
     const budget = useSelector((store) => store.budget)
     const month = useSelector((store) => store.month)
+
+    
 
 
 
@@ -114,11 +117,10 @@ export default function Categorytype({ b }) {
 
 
             </div>
-            <div className='removeMargin'>
 
             <Card style={{ backgroundColor: colorz, borderRadius: 50 }} sx={{ minWidth: 275 }} variant="outlined">
                 <CardContent>
-                    <Typography variant="h6" color="orchid"> <strong>  </strong> </Typography>
+                    <Typography variant="h6" color="#BF9ACA"> <strong> budget:{b.total_amount} </strong> </Typography>
                     <AddIcon fontSize="large" className='plus' color="secondary" onClick={() => { b.total_amount > 0 ? handleOpen(b) : alert("You need a budget for that category") }} />
                     <Typography variant='h4' color="#262626">{b.category_name}</Typography>
                     <div>{transactions.map((t, i) => {
@@ -132,6 +134,7 @@ export default function Categorytype({ b }) {
 
                                     <LinearProgress style={{ minwidth: 240, borderRadius: 5, minHeight: 10 }} color={progressColor(t.total_spent, b.total_amount)} variant="determinate" value={(t.total_spent / b.total_amount) * 100} />
                                     <Typography variant='h4' color="darkorange" className='remaining'> {(t.total_spent)}/ {b.total_amount}</Typography>
+                                  
                                 </div>
 
                             )
@@ -141,7 +144,6 @@ export default function Categorytype({ b }) {
                 </CardContent>
             </Card>
 
-        </div>
         </div>
     )
 }
