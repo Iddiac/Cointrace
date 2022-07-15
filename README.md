@@ -1,6 +1,6 @@
 # Cointrace
 <br />
-## Duration 2-Week 
+Duration 2-Week 
 <br />
 
 Description
