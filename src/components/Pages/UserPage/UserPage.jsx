@@ -74,6 +74,7 @@ const closeModal = () => setOpen(false);
     return(
 
     <div className="container">
+      
     {/* <img src={Cointrace} className='logo'></img> */}
       <Loadmonths />
 

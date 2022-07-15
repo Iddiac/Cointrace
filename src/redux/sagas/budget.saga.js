@@ -18,7 +18,6 @@ function* updateTotal(action) {
 
     const month = yield select(state => state.month);
     yield put({ type:'FETCH_BUDGET', payload:{monthID: month.name} })
-    yield put({ type: 'FETCH_TRANSACTIONS', payload:{monthID:month.name} })
   }
   catch {
     console.error('error getting into in budgetsaga put')

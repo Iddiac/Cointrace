@@ -17,8 +17,8 @@ export default function Monthincome() {
   const [income, setIncome] = useState('');
 
   useEffect(() => {
-    dispatch({ type: 'ADD_BUDGET', payload: { monthNum: month.id, monthID: month.name } })
-  }, [month])
+    dispatch({ type: 'ADD_BUDGET', payload: { monthID: month.name,monthNum: month.id, } })
+  }, [month.name])
 
 
   return (
