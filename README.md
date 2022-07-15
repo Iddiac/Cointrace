@@ -1,6 +1,7 @@
 # Cointrace
 <br />
-Duration 2-Week 
+## Duration 2-Week 
+<br />
 
 Description
 Cointrace is a personal budgeting application that looks to create a simple and accessable way to manage financnes on a month to month basis. The idea for this project came from the fact that i always hated getting prompted to connect my bank account before using any budgeting app, this solves that issue. Users are able to log in,select a month,input an income for that month,pick between categories and insert indivisual budgets for those categories.
