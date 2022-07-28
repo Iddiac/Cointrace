@@ -22,8 +22,10 @@ Cointrace is a personal budgeting application that looks to create a simple and 
 1. Login or Register to gain access to the app.
 ![Wireframe](/public/LandingPage.png)
 2. On log on, you are sent to an instruction page where the details of how to use the app are shown.
+![Wireframe](/public/Instructions.png)
 3. On click of a month, you are prompted to input an income for a month then sent to that specific month's page
 4. The month page has inputs for budget incomes and expenses within those budgets. To input an expense, simply click the + button and to delete simpy click the trashbin icon.
+![Wireframe](/public/Main.png)
 
 ## Roadmap
 
